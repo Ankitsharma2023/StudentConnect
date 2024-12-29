@@ -3,6 +3,8 @@ import { StudentCard } from "@/components/StudentCard/StudentCard";
 import db from "@/lib/db";
 import { notFound } from "next/navigation";
 
+import DynamicSearchField from "@/components/ui/Dynamicsearch";
+
 const HomePage = async () => {
  const session = await auth();
  if (!session) return notFound();
@@ -21,6 +23,7 @@ const HomePage = async () => {
        <button type="submit">Log Out</button>
      </form>
      </div>
+     <DynamicSearchField  />
      <div className="min-h-screen w-full bg-gray-50 grid grid-col-1 sm:grid-col-2 md:grid-cols-3 items-center justify-center p-4 gap-5">
      {students.map((studentData, index) => (
       <StudentCard key={index} photoURL={studentData.photoURL} name={studentData.name!} usn={studentData.usn} branch={studentData.branch!} year={studentData.year} tags={studentData.tags} />
