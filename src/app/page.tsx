@@ -21,9 +21,9 @@ const HomePage = async () => {
        <button type="submit">Log Out</button>
      </form>
      </div>
-     <div className="min-h-screen w-full bg-gray-50 flex items-center justify-center p-4 gap-5">
+     <div className="min-h-screen w-full bg-gray-50 grid grid-col-1 sm:grid-col-2 md:grid-cols-3 items-center justify-center p-4 gap-5">
      {students.map((studentData, index) => (
-      <StudentCard key={index} name={studentData.name!} usn={studentData.usn} branch={studentData.branch!} year={studentData.year} tags={studentData.tags} />
+      <StudentCard key={index} photoURL={studentData.photoURL} name={studentData.name!} usn={studentData.usn} branch={studentData.branch!} year={studentData.year} tags={studentData.tags} />
     ))}
     </div>
    </main>

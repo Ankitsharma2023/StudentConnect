@@ -6,7 +6,7 @@ type TagListProps = {
 
 export const TagList: React.FC<TagListProps> = ({ tags }) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-nowrap overflow-ellipsis gap-2">
       {tags.map((tag) => (
         <span
           key={tag}
