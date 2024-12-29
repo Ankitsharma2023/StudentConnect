@@ -11,7 +11,8 @@ model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified Boolean?
+  profileCompleted Boolean  @default(false)
   image         String?
   accounts      Account[]
 }
@@ -34,4 +35,19 @@ model Account {
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+model Profile {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String?   @unique
+  name          String?
+  photoURL      String?
+  about         String?
+  branch        String?
+  github        String?
+  instagram     String?
+  linkedin      String?
+  usn           String
+  year          Int
+  tags          String[]
+  createdAt     DateTime @default(now())
 }

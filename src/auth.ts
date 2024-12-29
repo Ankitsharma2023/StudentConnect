@@ -15,12 +15,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const existingUser = await db.user.findUnique({
+        let existingUser = await db.user.findUnique({
           where: { email: user.email||undefined },
         });
 
         if (!existingUser) {
-          await db.user.create({
+          existingUser= await db.user.create({
             data: {
               email: user.email,
               name: user.name,
@@ -40,6 +40,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     async session({ session, token }) {
       if (token) {
+        
         session.user.id = token.id as string;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
@@ -50,7 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     redirect() {
-      return "/";
+      return "/profile";
     },
   },
 });

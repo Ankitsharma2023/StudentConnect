@@ -11,7 +11,6 @@ export default auth(req => {
  const pathname = req.nextUrl.pathname;
 
  const isAuth = req.auth;
-
  const isAccessingApiAuthRoute = pathname.startsWith(API_AUTH_PREFIX);
  const isAccessingAuthRoute = AUTH_ROUTES.some(route => pathname.startsWith(route));
  const isAccessingProtectedRoute = PROTECTED_ROUTES.some(route => pathname.startsWith(route));
