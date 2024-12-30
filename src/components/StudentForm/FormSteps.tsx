@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFormContext } from './FormContext';
 import { StepOne } from './StepOne';
 import { StepTwo } from './StepTwo';
@@ -11,16 +11,7 @@ import { val } from '../validate';
 import { ToastContainer, toast } from 'react-toastify';
 export const FormSteps: React.FC = () => {
   const { step, setStep, isLastStep, data } = useFormContext();
-  const [isValid, setIsValid] = useState<boolean | null>(null); 
-
-  useEffect(() => {
-    const validate = async () => {
-      const valid = await validateStep();
-      setIsValid(valid);
-    };
-
-    validate();
-  }, [step]); 
+ const isValid =true; 
 
   
   const validateStep = async (): Promise<boolean> => {
