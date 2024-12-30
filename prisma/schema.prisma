@@ -46,7 +46,7 @@ model Profile {
   github        String?
   instagram     String?
   linkedin      String?
-  usn           String
+  usn           String  @unique
   year          Int
   tags          String[]
   createdAt     DateTime @default(now())

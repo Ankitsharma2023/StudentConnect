@@ -1,8 +1,20 @@
 'use client'
 import React, { createContext, useContext, useState } from 'react';
-import type { StudentData } from '../../data/branches';
+import type { Branch } from '../../data/branches';
 
-
+interface StudentData {
+  name: string;
+  email:string;
+  usn: string;
+  photoURL: string|null;
+  branch: string;
+  year: number;
+  tags: string[];
+  about: string;
+  linkedin: string |null;
+  github: string |null;
+  instagram: string |null;
+}
 
 interface FormContextType {
   data: StudentData;
@@ -14,20 +26,8 @@ interface FormContextType {
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
-export const FormProvider: React.FC<{ children: React.ReactNode,email:string,photo:string|null }> = ({ children,email,photo }) => {
-  const [data, setData] = useState<StudentData>({
-    name: '',
-    email:email,
-    photoURL:photo,
-    usn: '',
-    branch: '',
-    year: 0,
-    tags: [],
-    about: '',
-    linkedin: '',
-    github: '',
-    instagram: '',
-  });
+export const FormProvider: React.FC<{ children: React.ReactNode,Sdata:StudentData}> = ({ children,Sdata }) => {
+  const [data, setData] = useState<StudentData>(Sdata);
   const [step, setStep] = useState(1);
   const isLastStep = step === 3;
 
