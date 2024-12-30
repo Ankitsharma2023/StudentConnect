@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import DynamicSearchField from "@/components/ui/Dynamicsearch";
 import StudentFilter from "@/components/ui/Filter";
 import NotFound from "@/components/NotFound/NotFound";
+import ScrollToTopButton from "@/components/ScrollToTop";
 
 const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
   const session = await auth();
@@ -69,6 +70,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
           />
         ))}
       </div>
+      <ScrollToTopButton/>
     </main>
   );
 };
