@@ -20,7 +20,7 @@ export async function create(data:StudentData){
       if(existingUser){
         return
       }
-    const submission = await db.profile.create({
+      await db.profile.create({
         data: {
             name:data.name,
             email:data.email,

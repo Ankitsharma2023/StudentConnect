@@ -1,14 +1,12 @@
 // components/ui/Navbar.tsx
 
 import { auth, signOut } from "@/auth";
-import DynamicSearchField from "@/components/ui/Dynamicsearch";
-import StudentFilter from "@/components/ui/Filter";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const Navbar = async () => {
   const session = await auth();
-  if (!session) return notFound();
+  if (!session) return;
 
   return (
     <div className="w-full bg-gray-100 shadow-md">
@@ -17,7 +15,7 @@ const Navbar = async () => {
         
         {/* Hello message for large screens */}
         <Link href={"/"}>
-        <h1 className="hidden md:block text-xl font-semibold" >
+        <h1 className="text-xl font-semibold" >
           Hello, {session.user!.name}
         </h1></Link>
        

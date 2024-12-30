@@ -14,7 +14,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
   const { name, usn, branch, year, tags } = await searchParams;
 
   
-  const filterConditions: any = {};
+  const filterConditions:any = {};
 
   if (name) {
     filterConditions.name = { contains: name, mode: "insensitive" };
@@ -34,7 +34,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
 
   
   if (tags) {
-    let new_tags=tags.replaceAll("#","")
+    const new_tags=tags.replaceAll("#","")
     if (new_tags.includes(',')) {
       const tagList = new_tags.split(',').map(tag => tag.trim()); 
       filterConditions.tags = { hasSome: tagList }; 
@@ -44,7 +44,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
   }
 
   
-  let students = await db.profile.findMany({
+  const students = await db.profile.findMany({
     where: filterConditions,
   });
 

@@ -28,8 +28,8 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student }) => {
         <div className="p-8">
           {/* Header Section with Profile Circle */}
           <div className="flex items-center gap-6 mb-8">
-            <div className="w-24 h-24 rounded-full bg-violet-500 flex items-center justify-center text-white text-2xl font-bold">
-              {student.name.split(" ").map((n) => n[0]).join("")}
+            <div>
+            <img className="w-24 h-24 rounded-full flex items-center justify-center text-white text-2xl font-bold" src={student.photoURL||""} alt='Profile Photo' referrerPolicy="no-referrer"/>
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-800 mb-2">{student.name}</h1>

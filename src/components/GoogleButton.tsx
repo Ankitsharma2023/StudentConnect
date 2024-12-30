@@ -1,4 +1,4 @@
-const GoogleButton=(props:any)=>{
+const GoogleButton=()=>{
     return (
     <button className="gsi-material-button">
   <div className="gsi-material-button-state"></div>

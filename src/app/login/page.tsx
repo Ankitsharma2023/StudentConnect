@@ -4,7 +4,7 @@ import GoogleButton from "@/components/GoogleButton";
 
 const LoginPage = () => {
     return (
-        <main className="flex w-full h-full flex-col justify-center items-center gap-4 bg-gradient-to-b from-emerald-50 to-emerald-100">
+        <main className="flex w-full h-screen flex-col justify-center items-center gap-4">
 
             <form
             className="flex flex-row justify-center items-center"

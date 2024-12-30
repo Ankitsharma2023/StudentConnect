@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { GetServerSidePropsContext } from 'next'; 
+ 
 import  db  from '@/lib/db'; 
 import StudentProfile from '@/components/ui/StudentProfile'; 
 import { notFound } from 'next/navigation';

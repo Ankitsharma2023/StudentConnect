@@ -7,7 +7,6 @@ import { StepThree } from './StepThree';
 import { Confirmation } from './Confirmation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ProgressBar } from '../ui/ProgressBar';
-import { create } from '../create';
 
 export const FormSteps: React.FC = () => {
   const { step, setStep, isLastStep, data } = useFormContext();

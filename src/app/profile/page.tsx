@@ -18,7 +18,7 @@ const Test = async () => {
     redirect("/", RedirectType.replace);
   }
   return (
-    <FormProvider email={session.user?.email!} photo={session.user?.image||null}>
+    <FormProvider email={session.user?.email??""} photo={session.user?.image||null}>
       <FormLayout>
         <FormSteps />
       </FormLayout>
