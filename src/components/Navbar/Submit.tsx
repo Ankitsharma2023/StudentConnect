@@ -1,7 +1,6 @@
 'use client'
 import { LogOut } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
-import DropdownItem from './DropdownItem'
 
 export function SubmitButton() {
   const { pending } = useFormStatus()
