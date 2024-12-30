@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormContext } from './FormContext';
 import { StepOne } from './StepOne';
 import { StepTwo } from './StepTwo';
@@ -7,36 +7,69 @@ import { StepThree } from './StepThree';
 import { Confirmation } from './Confirmation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ProgressBar } from '../ui/ProgressBar';
-
+import { val } from '../validate';
+import { ToastContainer, toast } from 'react-toastify';
 export const FormSteps: React.FC = () => {
   const { step, setStep, isLastStep, data } = useFormContext();
+  const [isValid, setIsValid] = useState<boolean | null>(null); 
 
-  const validateStep = () => {
+  useEffect(() => {
+    const validate = async () => {
+      const valid = await validateStep();
+      setIsValid(valid);
+    };
+
+    validate();
+  }, [step]); 
+
+  
+  const validateStep = async (): Promise<boolean> => {
     switch (step) {
       case 1:
-        return data.name && data.usn && data.branch && data.year;
+        if (data.name && data.usn && data.branch && data.year) {
+            
+            const usnPattern = /^\d[a-z]{2}\d{2}[a-z]{2}\d{3}$/;
+            if(!usnPattern.test(data.usn)){
+                toast.error('Invalid USN format. Correct format: 1BIYYBB00N');
+                return false;
+            }
+            
+            const usnValid = await val(data.email,data.usn);
+            if (!usnValid) {
+              toast.error('Account for this USN is already used!');
+            }
+            return usnValid;
+        } else {
+          toast.error('Please fill in all fields: Name, USN, Branch, and Year.');
+          return false;
+        }
       case 2:
-        return data.tags.length > 0 || data.about;
+        if (data.tags.length === 0 && data.about.length === 0) {
+          toast.error('Please provide at least one tag or a description about yourself.');
+          return false;
+        }
+        return true;
       case 3:
-        return data.linkedin || data.github || data.instagram;
+        if (!data.linkedin && !data.github && !data.instagram) {
+          toast.error('Please provide at least one social link (LinkedIn, GitHub, Instagram).');
+          return false;
+        }
+        return true;
       default:
         return true;
     }
   };
 
-  const handleNext = () => {
-    
-      if (validateStep()) {
-        setStep(s => s + 1);
-      }
-   
-
+  
+  const handleNext = async () => {
+    if (await validateStep()) {
+      setStep((s) => s + 1);
+    }
   };
 
-  const handleBack = () => {
-    
-      setStep(s => s - 1);
   
+  const handleBack = () => {
+    setStep((s) => s - 1);
   };
 
   if (step === 4) {
@@ -45,6 +78,7 @@ export const FormSteps: React.FC = () => {
 
   return (
     <div className="space-y-8 text-black">
+        <ToastContainer/>
       <ProgressBar step={step} />
 
       <div className="transition-all duration-500 transform">
@@ -64,11 +98,11 @@ export const FormSteps: React.FC = () => {
         </button>
         <button
           onClick={handleNext}
-          disabled={!validateStep()}
+          disabled={isValid === null || !isValid} 
           className={`flex items-center px-4 py-2 text-sm font-medium rounded-md
-            ${validateStep()
-              ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            ${isValid === null || !isValid
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-emerald-600 text-white hover:bg-emerald-700'
             }`}
         >
           {isLastStep ? 'Submit' : 'Next'}
