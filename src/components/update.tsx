@@ -1,12 +1,15 @@
 'use server'
+import { auth } from "@/auth";
 import { StudentData } from "@/data/branches";
 import db from "@/lib/db";
 
 
 
 export async function update(data: StudentData) {
+    const session = await auth();
+    if(!session) return;
   const existingUser = await db.profile.findUnique({
-    where: { email: data.email || undefined },
+    where: { email: session?.user?.email || undefined },
   });
 
   if (existingUser) {
