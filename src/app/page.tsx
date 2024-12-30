@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { StudentCard } from "@/components/ui/StudentCard";
 import db from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import DynamicSearchField from "@/components/ui/Dynamicsearch";
 import StudentFilter from "@/components/ui/Filter";
@@ -44,7 +44,12 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
     }
   }
 
-  
+  const currentProfile=await db.profile.findUnique({
+    where:{email:session?.user?.email??undefined}
+  })
+  if(!currentProfile){
+    redirect("/profile")
+  }
   const students = await db.profile.findMany({
     where: filterConditions,
   });

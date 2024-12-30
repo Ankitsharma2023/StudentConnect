@@ -19,7 +19,7 @@ export const FormSteps: React.FC = () => {
       case 1:
         if (data.name && data.usn && data.branch && data.year) {
             
-            const usnPattern = /^\d[a-z]{2}\d{2}[a-z]{2}\d{3}$/;
+            const usnPattern = /^\d[a-zA-Z]{2}\d{2}[a-zA-Z]{2}\d{3}$/;
             if(!usnPattern.test(data.usn)){
                 toast.error('Invalid USN format. Correct format: 1BIYYBB00N');
                 return false;

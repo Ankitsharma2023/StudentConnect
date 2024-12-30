@@ -1,12 +1,24 @@
-'use client'
+import { auth } from "@/auth";
+import { SuggestionBox } from "@/components/About/SuggestionBox";
+import { Tags } from "@/components/About/Tags";
 import Socials from "@/components/Socials/SocialLinks";
-import { Tags } from "lucide-react";
+import db from "@/lib/db";
+import { redirect } from "next/navigation";
 
 
-const About = () => {
-    return <div className="min-h-screen flex flex-col bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins'] gap-2 ">
-        <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+const About = async () => {
+    const session = await auth();
+    if(session){
+    const currentProfile=await db.profile.findUnique({
+        where:{email:session?.user?.email??undefined}
+      })
+      if(!currentProfile){
+        redirect("/profile")
+      }
+    }
+    return <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins'] gap-2 ">
+        <div className="max-w-4xl mx-auto flex flex-col justify-items-center items-center">
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
                 {/* Profile Section */}
                 <div className="p-8">
                     <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -35,7 +47,9 @@ const About = () => {
 
                     {/* Tags Section */}
                     <Tags />
+                    <div className="w-full flex justify-center items-center">
                     <Socials links={{ github: "https://github.com/Ankitsharma2023", linkedin: "https://www.linkedin.com/in/ankit-sharma-4a727828b/", instagram: "https://www.instagram.com/ankit__sharma_0866/" }} />
+                    </div>
                     {/* About Section */}
                     <div className="mt-8">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
@@ -81,14 +95,19 @@ const About = () => {
                     </div>
 
                     {/* Tags Section */}
-                    <Tags />
+                    <div className="w-full flex justify-center items-center">
                     <Socials links={{ github: "https://github.com/Addy897", linkedin:null,instagram:null}} />
                     {/* About Section */}
-                    
+                    </div>
                 </div>
 
             </div>
         </div>
+        <div className="col-span-2 flex justify-center items-center w-full mt-8">
+                <div className="w-full sm:w-1/2">
+                    <SuggestionBox />
+                </div>
+            </div>
     </div>
 }
 export default About;

@@ -1,22 +1,52 @@
-import React, { useState } from 'react';
 
-export function SuggestionBox() {
-  const [suggestion, setSuggestion] = useState('');
+import { auth } from "@/auth";
+import db from "@/lib/db";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle suggestion submission here
-    console.log('Suggestion submitted:', suggestion);
-    setSuggestion('');
-  };
+export async function SuggestionBox() {
+  const session = await auth();
+  if (!session) return;
 
   return (
     <div className="bg-gray-50 p-8 border-t border-gray-100">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Leave a Suggestion</h2>
-      <form onSubmit={handleSubmit}>
+      <form action={async (e: FormData) => {
+        'use server'
+        const suggestion = e.get('suggestion') as string;
+        if (suggestion) {
+          try {
+    
+            const existingSuggestion = await db.suggestions.findUnique({
+              where: { email: session?.user?.email || undefined },
+            });
+    
+            if (existingSuggestion) {
+    
+              const updatedSuggestions = [...existingSuggestion.sug, suggestion];
+    
+              await db.suggestions.update({
+                where: { email: session?.user?.email || undefined },
+                data: {
+                  sug: updatedSuggestions,
+                },
+              });
+            } else {
+    
+              await db.suggestions.create({
+                data: {
+                  email: session?.user?.email || '',
+                  sug: [suggestion],
+                },
+              });
+            }
+    
+            console.log('Suggestion submitted successfully!');
+          } catch (error) {
+            console.error('Error submitting suggestion:', error);
+          }
+        }
+      }}>
         <textarea
-          value={suggestion}
-          onChange={(e) => setSuggestion(e.target.value)}
+          name='suggestion'
           className="w-full px-4 py-3 rounded-lg border border-gray-200 
                    focus:ring-2 focus:ring-gray-400 focus:border-transparent
                    transition-all duration-300 resize-none h-32"

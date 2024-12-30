@@ -51,3 +51,8 @@ model Profile {
   tags          String[]
   createdAt     DateTime @default(now())
 }
+model Suggestions {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  sug           String[]
+}

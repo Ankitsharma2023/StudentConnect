@@ -11,6 +11,9 @@ const Actions = async () => {
             <DropdownItem href='' icon={<LogOut />}>
                 
                 <form
+                onSubmit={(e)=>{
+                    e.preventDefault();
+                }}
         action={async () => {
             "use server";
             await signOut();
