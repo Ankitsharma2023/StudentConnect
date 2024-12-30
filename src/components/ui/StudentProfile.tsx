@@ -1,6 +1,7 @@
 import React from "react";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import { years } from "@/data/branches";
+import Socials from "../Socials/SocialLinks";
 
 interface StudentProfileProps {
   student: {
@@ -29,7 +30,7 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student }) => {
           {/* Header Section with Profile Circle */}
           <div className="flex items-center gap-6 mb-8">
             <div>
-            <img className="w-24 h-24 rounded-full flex items-center justify-center text-white text-2xl font-bold" src={student.photoURL||""} alt='Profile Photo' referrerPolicy="no-referrer"/>
+            <img className=" w-24 rounded-full flex items-center justify-center text-white text-2xl font-bold" src={student.photoURL||""} alt='Profile Photo' referrerPolicy="no-referrer"/>
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-800 mb-2">{student.name}</h1>
@@ -69,44 +70,8 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student }) => {
           </div>
 
           {/* Social Links */}
-          <div className="border-t pt-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Connect With Me</h2>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a
-                href={student.github??""}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
-              >
-                <Github className="w-6 h-6" />
-                <span>GitHub</span>
-              </a>
-              <a
-                href={student.linkedin??""}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
-              >
-                <Linkedin className="w-6 h-6" />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href={student.instagram??""}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 hover:text-pink-600 transition-colors"
-              >
-                <Instagram className="w-6 h-6" />
-                <span>Instagram</span>
-              </a>
-              <a
-                href={`mailto:${student.email}`}
-                className="flex items-center gap-2 text-gray-600 hover:text-violet-600 transition-colors"
-              >
-                <Mail className="w-6 h-6" />
-                <span>Email</span>
-              </a>
-            </div>
+          <div className="flex justify-center items-center w-full">
+          <Socials links={{github:student.github,linkedin:student.linkedin,instagram:student.instagram}}></Socials>
           </div>
         </div>
       </div>
