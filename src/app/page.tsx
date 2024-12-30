@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import DynamicSearchField from "@/components/ui/Dynamicsearch";
 import StudentFilter from "@/components/ui/Filter";
+import NotFound from "@/components/NotFound/NotFound";
 
 const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
   const session = await auth();
@@ -14,7 +15,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
   const { name, usn, branch, year, tags } = await searchParams;
 
   
-  const filterConditions:any = {};
+  const filterConditions:any = {}; 
 
   if (name) {
     filterConditions.name = { contains: name, mode: "insensitive" };
@@ -47,7 +48,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
   const students = await db.profile.findMany({
     where: filterConditions,
   });
-
+  if(!students.length) return <NotFound/>
   return (
     <main className="flex flex-col items-center gap-4 h-full text-black">
       <div className="w-full p-4 max-w-screen-xl mx-auto">

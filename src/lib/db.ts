@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: 0 */  // --> OFF
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
