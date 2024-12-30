@@ -16,13 +16,13 @@ const Actions = async () => {
             
         }}
         >
-            <DropdownItem href='' icon={<LogOut />}>
+            
                 
                 
             <SubmitButton/>
        
                 
-            </DropdownItem>
+            
             </form>
         </div>
     )
