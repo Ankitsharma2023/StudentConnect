@@ -54,12 +54,14 @@ const About = async () => {
                     <div className="mt-8">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
                         <p className="text-gray-600 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in culpa qui officia deserunt mollit anim id est laborum.
+                        Hello! I’m an engineering student at Bangalore Institute of Technology, specializing in full-stack development and machine learning. I’m passionate about building innovative projects and using technology to solve real-world problems.
+     <br />
+     <br />
+As the Google Developer Group Lead 2024 (former GDSC ), I’ve created a tech community of over 1000+ members, where we collaborate, share ideas, and grow together.
+
+I love learning, exploring new technologies, and helping others along the way.
+<br />
+ Let’s connect and make something amazing!
                         </p>
                     </div>
                 </div>
