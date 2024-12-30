@@ -9,23 +9,22 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ProgressBar } from '../ui/ProgressBar';
 import { val } from '../validate';
 import { ToastContainer, toast } from 'react-toastify';
+
 export const FormSteps: React.FC = () => {
   const { step, setStep, isLastStep, data } = useFormContext();
- const isValid =true; 
-
+  const isValid = true; 
   
   const validateStep = async (): Promise<boolean> => {
     switch (step) {
       case 1:
         if (data.name && data.usn && data.branch && data.year) {
-            
             const usnPattern = /^\d[a-zA-Z]{2}\d{2}[a-zA-Z]{2}\d{3}$/;
-            if(!usnPattern.test(data.usn)){
+            if (!usnPattern.test(data.usn)) {
                 toast.error('Invalid USN format. Correct format: 1BIYYBB00N');
                 return false;
             }
             
-            const usnValid = await val(data.email,data.usn);
+            const usnValid = await val(data.email, data.usn);
             if (!usnValid) {
               toast.error('Account for this USN is already used!');
             }
@@ -41,24 +40,59 @@ export const FormSteps: React.FC = () => {
         }
         return true;
       case 3:
+       
+
         if (!data.linkedin && !data.github && !data.instagram) {
           toast.error('Please provide at least one social link (LinkedIn, GitHub, Instagram).');
           return false;
         }
+
+       
+        const isLinkedInValid = (url: string | undefined): boolean => {
+          if (!url) return true;
+          const linkedinPattern = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
+          return linkedinPattern.test(url);
+        };
+
+        const isGitHubValid = (url: string | undefined): boolean => {
+          if (!url) return true;
+          const githubPattern = /^https:\/\/github\.com\/[a-zA-Z0-9-]+\/?$/;
+          return githubPattern.test(url);
+        };
+
+        const isInstagramValid = (url: string | undefined): boolean => {
+          if (!url) return true;
+          const instagramPattern = /^https:\/\/www\.instagram\.com\/[a-zA-Z0-9._-]+\/?$/;
+          return instagramPattern.test(url);
+        };
+
+        if (data.linkedin && !isLinkedInValid(data.linkedin)) {
+          toast.error('Invalid LinkedIn URL format. Please ensure it starts with "https://www.linkedin.com/in/".');
+          return false;
+        }
+
+        if (data.github && !isGitHubValid(data.github)) {
+          toast.error('Invalid GitHub URL format. Please ensure it starts with "https://github.com/".');
+          return false;
+        }
+
+        if (data.instagram && !isInstagramValid(data.instagram)) {
+          toast.error('Invalid Instagram URL format. Please ensure it starts with "https://www.instagram.com/".');
+          return false;
+        }
+
         return true;
       default:
         return true;
     }
   };
 
-  
   const handleNext = async () => {
     if (await validateStep()) {
       setStep((s) => s + 1);
     }
   };
 
-  
   const handleBack = () => {
     setStep((s) => s - 1);
   };
