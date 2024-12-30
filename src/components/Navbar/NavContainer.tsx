@@ -1,18 +1,46 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { User } from 'lucide-react';
 import NavLink from './Navlink';
 import Link from 'next/link';
 
-
-
-type NavigationProps ={
-    name:string;
-    children:React.ReactNode
+type NavigationProps = {
+  name: string;
+  children: React.ReactNode;
 }
-const Navbar: React.FC<NavigationProps> = ({name,children}) => {
+
+const Navbar: React.FC<NavigationProps> = ({ name, children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!dropdownRef.current || !buttonRef.current) return;
+
+      // Check if the click was on the profile button
+      if (buttonRef.current.contains(event.target as Node)) return;
+
+      // Check if the click was inside the dropdown
+      if (dropdownRef.current.contains(event.target as Node)) {
+        // Check if the clicked element is a menu item
+        const clickedElement = event.target as HTMLElement;
+        const isMenuItem = clickedElement.closest('[role="menuitem"]');
+        
+        // Only close if the clicked element is not "Sign out" or "Edit Profile"
+        const text = clickedElement.textContent?.toLowerCase() || '';
+        if (isMenuItem && (text.includes('sign out') || text.includes('edit profile'))) {
+          return;
+        }
+      }
+
+      setIsDropdownOpen(false);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="relative">
@@ -39,6 +67,7 @@ const Navbar: React.FC<NavigationProps> = ({name,children}) => {
             {/* Account Dropdown */}
             <div className="relative items-center">
               <button
+                ref={buttonRef}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="p-2 hover:bg-purple-800/50 flex flex-row justify-center items-start rounded-full transition-all duration-300 focus:outline-none hover:scale-110 active:scale-95"
                 aria-label="Account menu"
@@ -47,9 +76,9 @@ const Navbar: React.FC<NavigationProps> = ({name,children}) => {
                 {name}
               </button>
               {isDropdownOpen && (
-                
-                  children
-                
+                <div ref={dropdownRef}>
+                  {children}
+                </div>
               )}
             </div>
           </div>
