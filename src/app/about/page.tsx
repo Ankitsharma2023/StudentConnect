@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 const About = async () => {
     const session = await auth();
-    if(session){
+    if (session) {
         const currentProfile = await db.profile.findUnique({
             where: { email: session?.user?.email ?? undefined }
         });
@@ -17,8 +17,9 @@ const About = async () => {
     }
 
     return (
-        <div className="min-h-screen h-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-2 gap-8 bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins']">
-            <div className="max-w-4xl h-full mx-auto flex flex-col justify-center items-center">
+        <div className="min-h-screen h-full flex flex-col md:grid md:grid-cols-1 lg:grid-cols-2 gap-8 bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins']">
+            
+            <div className="max-w-4xl mx-auto flex flex-col justify-center items-center md:items-start">
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
                     <div className="p-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -42,25 +43,31 @@ const About = async () => {
                             </div>
                         </div>
 
-                        {/* Tags Section */}
+                        
                         <Tags />
-
-                        <div className="w-full flex justify-center items-center mt-4">
+                        <div className="w-full flex justify-center items-center">
                             <Socials links={{ github: "https://github.com/Ankitsharma2023", linkedin: "https://www.linkedin.com/in/ankit-sharma-4a727828b/", instagram: "https://www.instagram.com/ankit__sharma_0866/" }} />
                         </div>
-
-                        {/* About Section */}
+                        
                         <div className="mt-8">
                             <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
                             <p className="text-gray-600 leading-relaxed">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Hello! I’m an engineering student at Bangalore Institute of Technology, specializing in full-stack development and machine learning. I’m passionate about building innovative projects and using technology to solve real-world problems.
+                                <br />
+                                <br />
+                                As the Google Developer Group Lead 2024 (former GDSC), I’ve created a tech community of over 1000+ members, where we collaborate, share ideas, and grow together.
+
+                                I love learning, exploring new technologies, and helping others along the way.
+                                <br />
+                                Let’s connect and make something amazing!
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="max-w-4xl h-full mx-auto flex flex-col justify-center items-center">
+            
+            <div className="max-w-4xl mx-auto flex flex-col justify-center items-center md:items-start">
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
                     <div className="p-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -85,7 +92,7 @@ const About = async () => {
                             </div>
                         </div>
 
-                        {/* Tags Section */}
+                        
                         <div className="w-full flex justify-center items-center mt-4">
                             <Socials links={{ github: "https://github.com/Addy897", linkedin: null, instagram: null }} />
                         </div>
@@ -93,7 +100,8 @@ const About = async () => {
                 </div>
             </div>
 
-            <div className="col-span-2 flex justify-center items-center w-full">
+            
+            <div className="w-full col-span-2 flex justify-center items-center mt-8 px-4">
                 <div className="w-full sm:w-1/2">
                     <SuggestionBox />
                 </div>

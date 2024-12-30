@@ -50,7 +50,7 @@ export async function SuggestionBox() {
           className="w-full px-4 py-3 rounded-lg border border-gray-200 
                    focus:ring-2 focus:ring-gray-400 focus:border-transparent
                    transition-all duration-300 resize-none h-32"
-          placeholder="Share your thoughts or suggestions..."
+          placeholder="Share your Feedbacks or suggestions..."
         ></textarea>
         <button
           type="submit"
