@@ -1,5 +1,4 @@
 import React from "react";
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import { years } from "@/data/branches";
 import Socials from "../Socials/SocialLinks";
 

@@ -13,7 +13,7 @@ export const StepThree: React.FC = () => {
         <div className="relative">
           <Input
             label="LinkedIn Profile"
-            value={data.linkedin}
+            value={data.linkedin??""}
             onChange={(e) => setData(prev => ({ ...prev, linkedin: e.target.value }))}
             placeholder="https://linkedin.com/in/username"
             icon={<Linkedin className="w-5 h-5 text-gray-400" />}
@@ -23,7 +23,7 @@ export const StepThree: React.FC = () => {
         <div className="relative">
           <Input
             label="GitHub Profile"
-            value={data.github}
+            value={data.github??""}
             onChange={(e) => setData(prev => ({ ...prev, github: e.target.value }))}
             placeholder="https://github.com/username"
             icon={<Github className="w-5 h-5 text-gray-400" />}
@@ -33,7 +33,7 @@ export const StepThree: React.FC = () => {
         <div className="relative">
           <Input
             label="Instagram Profile"
-            value={data.instagram}
+            value={data.instagram??""}
             onChange={(e) => setData(prev => ({ ...prev, instagram: e.target.value }))}
             placeholder="https://instagram.com/username"
             icon={<Instagram className="w-5 h-5 text-gray-400" />}

@@ -1,6 +1,5 @@
 'use client'
 import React, { createContext, useContext, useState } from 'react';
-import type { Branch } from '../../data/branches';
 
 interface StudentData {
   name: string;
