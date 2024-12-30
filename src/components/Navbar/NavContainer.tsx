@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
 import NavLink from './Navlink';
+import Link from 'next/link';
 
 
 
@@ -18,7 +19,7 @@ const Navbar: React.FC<NavigationProps> = ({name,children}) => {
       <nav className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white p-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between pb-2">
           {/* Animated Logo */}
-          <div className="hidden md:flex items-center group cursor-pointer">
+          <Link className="hidden md:flex items-center group cursor-pointer" href='/'>
             <span className="text-2xl font-extrabold tracking-tight transition-all duration-300 group-hover:scale-105">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-purple-400 group-hover:from-purple-300 group-hover:to-purple-500">
                 Student
@@ -27,12 +28,12 @@ const Navbar: React.FC<NavigationProps> = ({name,children}) => {
                 Connect
               </span>
             </span>
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-8">
             <NavLink href="/">Home</NavLink>
-            <NavLink href="/">About me</NavLink>
+            <NavLink href="/about">About me</NavLink>
             <NavLink href="/">Features</NavLink>
             
             {/* Account Dropdown */}
