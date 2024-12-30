@@ -15,32 +15,7 @@ const Navbar: React.FC<NavigationProps> = ({ name, children }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!dropdownRef.current || !buttonRef.current) return;
-
-      // Check if the click was on the profile button
-      if (buttonRef.current.contains(event.target as Node)) return;
-
-      // Check if the click was inside the dropdown
-      if (dropdownRef.current.contains(event.target as Node)) {
-        // Check if the clicked element is a menu item
-        const clickedElement = event.target as HTMLElement;
-        const isMenuItem = clickedElement.closest('[role="menuitem"]');
-        
-        // Only close if the clicked element is not "Sign out" or "Edit Profile"
-        const text = clickedElement.textContent?.toLowerCase() || '';
-        if (isMenuItem && (text.includes('sign out') || text.includes('edit profile'))) {
-          return;
-        }
-      }
-
-      setIsDropdownOpen(false);
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  
 
   return (
     <div className="relative">

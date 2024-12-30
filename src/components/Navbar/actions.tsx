@@ -1,6 +1,7 @@
 import { signOut } from "@/auth";
 import { Settings, LogOut } from "lucide-react";
 import DropdownItem from "./DropdownItem";
+import { SubmitButton } from "./Submit";
 
 const Actions = async () => {
     return (
@@ -11,15 +12,13 @@ const Actions = async () => {
             <DropdownItem href='' icon={<LogOut />}>
                 
                 <form
-                onSubmit={(e)=>{
-                    e.preventDefault();
-                }}
         action={async () => {
             "use server";
             await signOut();
+            
         }}
         >
-        <button type="submit">Log Out</button>
+            <SubmitButton/>
         </form>
                 
             </DropdownItem>
