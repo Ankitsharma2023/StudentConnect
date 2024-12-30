@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef} from 'react';
 import { User } from 'lucide-react';
 import NavLink from './Navlink';
 import Link from 'next/link';
