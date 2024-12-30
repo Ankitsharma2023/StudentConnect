@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react';
-import { TagList } from './TagList';
-import { StudentInfo } from './StudentInfo';
-import { Badge } from './Badge';
-import { ActionButtons } from './ActionButtons';
-import { Avatar } from './Avatar';
+import { TagList } from '@/components/StudentCard/TagList';
+import { StudentInfo } from '@/components/StudentCard/StudentInfo';
+import { Badge } from '@/components/StudentCard/Badge';
+import { ActionButtons } from '@/components/StudentCard/ActionButtons';
+import { Avatar } from '@/components/StudentCard/Avatar';
 
 export type StudentCardProps = {
   name: string;

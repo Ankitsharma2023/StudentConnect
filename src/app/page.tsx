@@ -1,5 +1,5 @@
 import { auth, signOut } from "@/auth";
-import { StudentCard } from "@/components/StudentCard/StudentCard";
+import { StudentCard } from "@/components/ui/StudentCard";
 import db from "@/lib/db";
 import { notFound } from "next/navigation";
 

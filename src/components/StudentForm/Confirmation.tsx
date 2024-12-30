@@ -13,8 +13,6 @@ export const Confirmation: React.FC = () => {
       redirect('/'); 
     }, 5000); 
     create(data);
-
-    
     return () => clearTimeout(timer);
   }, []);
   
