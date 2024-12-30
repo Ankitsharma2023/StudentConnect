@@ -1,5 +1,5 @@
 import { signOut } from "@/auth";
-import { Settings, LogOut } from "lucide-react";
+import { Settings } from "lucide-react";
 import DropdownItem from "./DropdownItem";
 import { SubmitButton } from "./Submit";
 
