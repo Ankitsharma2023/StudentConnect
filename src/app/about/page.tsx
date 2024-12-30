@@ -5,109 +5,101 @@ import Socials from "@/components/Socials/SocialLinks";
 import db from "@/lib/db";
 import { redirect } from "next/navigation";
 
-
 const About = async () => {
     const session = await auth();
     if(session){
-    const currentProfile=await db.profile.findUnique({
-        where:{email:session?.user?.email??undefined}
-      })
-      if(!currentProfile){
-        redirect("/profile")
-      }
+        const currentProfile = await db.profile.findUnique({
+            where: { email: session?.user?.email ?? undefined }
+        });
+        if (!currentProfile) {
+            redirect("/profile");
+        }
     }
-    return <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins'] gap-2 ">
-        <div className="max-w-4xl mx-auto flex flex-col justify-items-center items-center">
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
-                {/* Profile Section */}
-                <div className="p-8">
-                    <div className="flex flex-col md:flex-row gap-8 items-center">
-                        <div className="w-48 h-48 relative group">
-                            <img
-                                src="/profile.jpg"
-                                alt="Ankit Sharma"
-                                className="rounded-2xl object-cover w-full h-full shadow-lg 
-                         transition-transform duration-300 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-black bg-opacity-10 rounded-2xl 
-                            group-hover:bg-opacity-20 transition-all duration-300"></div>
-                        </div>
 
-                        <div className="flex-1">
-                            <h1 className="text-4xl font-bold text-gray-800 mb-2 
-                           hover:text-gray-700 transition-colors duration-300">
-                                Ankit Sharma
-                            </h1>
-                            <div className="space-y-2 text-gray-600">
-                                <p className="text-lg">2nd Year</p>
-                                <p className="text-lg">CSE (Data-Science)</p>
+    return (
+        <div className="min-h-screen h-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-2 gap-8 bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-['Poppins']">
+            <div className="max-w-4xl h-full mx-auto flex flex-col justify-center items-center">
+                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
+                    <div className="p-8">
+                        <div className="flex flex-col md:flex-row gap-8 items-center">
+                            <div className="w-48 h-48 relative group">
+                                <img
+                                    src="/profile.jpg"
+                                    alt="Ankit Sharma"
+                                    className="rounded-2xl object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-10 rounded-2xl group-hover:bg-opacity-20 transition-all duration-300"></div>
+                            </div>
+
+                            <div className="flex-1 text-center md:text-left">
+                                <h1 className="text-4xl font-bold text-gray-800 mb-2 hover:text-gray-700 transition-colors duration-300">
+                                    Ankit Sharma
+                                </h1>
+                                <div className="space-y-2 text-gray-600">
+                                    <p className="text-lg">2nd Year</p>
+                                    <p className="text-lg">CSE (Data-Science)</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Tags Section */}
-                    <Tags />
-                    <div className="w-full flex justify-center items-center">
-                    <Socials links={{ github: "https://github.com/Ankitsharma2023", linkedin: "https://www.linkedin.com/in/ankit-sharma-4a727828b/", instagram: "https://www.instagram.com/ankit__sharma_0866/" }} />
-                    </div>
-                    {/* About Section */}
-                    <div className="mt-8">
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
-                        <p className="text-gray-600 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                            in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                </div>
+                        {/* Tags Section */}
+                        <Tags />
 
-            </div>
-        </div>
-        <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div className="p-8">
-                    <div className="flex flex-col md:flex-row gap-8 items-center">
-                        <div className="w-48 h-48 relative group">
-                            <img
-                                src="https://lh3.googleusercontent.com/a/ACg8ocLJO8V2dzEB09C0u0MpowJ1H4RTbJ_te6hDtP0r-qOC4wthvw=s96-c"
-                                alt="Ankit Sharma"
-                                referrerPolicy="no-referrer"
-                                className="rounded-2xl object-cover w-full h-full shadow-lg 
-                         transition-transform duration-300 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-black bg-opacity-10 rounded-2xl 
-                            group-hover:bg-opacity-20 transition-all duration-300"></div>
+                        <div className="w-full flex justify-center items-center mt-4">
+                            <Socials links={{ github: "https://github.com/Ankitsharma2023", linkedin: "https://www.linkedin.com/in/ankit-sharma-4a727828b/", instagram: "https://www.instagram.com/ankit__sharma_0866/" }} />
                         </div>
 
-                        <div className="flex-1">
-                            <h1 className="text-4xl font-bold text-gray-800 mb-2 
-                           hover:text-gray-700 transition-colors duration-300">
-                                Aditya Srivastava
-                            </h1>
-                            <div className="space-y-2 text-gray-600">
-                                <p className="text-lg">2nd Year</p>
-                                <p className="text-lg">CSE (IoT)</p>
+                        {/* About Section */}
+                        <div className="mt-8">
+                            <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
+                            <p className="text-gray-600 leading-relaxed">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="max-w-4xl h-full mx-auto flex flex-col justify-center items-center">
+                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full flex flex-col justify-center items-center">
+                    <div className="p-8">
+                        <div className="flex flex-col md:flex-row gap-8 items-center">
+                            <div className="w-48 h-48 relative group">
+                                <img
+                                    src="https://lh3.googleusercontent.com/a/ACg8ocLJO8V2dzEB09C0u0MpowJ1H4RTbJ_te6hDtP0r-qOC4wthvw=s96-c"
+                                    alt="Ankit Sharma"
+                                    referrerPolicy="no-referrer"
+                                    className="rounded-2xl object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-10 rounded-2xl group-hover:bg-opacity-20 transition-all duration-300"></div>
+                            </div>
+
+                            <div className="flex-1 text-center md:text-left">
+                                <h1 className="text-4xl font-bold text-gray-800 mb-2 hover:text-gray-700 transition-colors duration-300">
+                                    Aditya Srivastava
+                                </h1>
+                                <div className="space-y-2 text-gray-600">
+                                    <p className="text-lg">2nd Year</p>
+                                    <p className="text-lg">CSE (IoT)</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Tags Section */}
-                    <div className="w-full flex justify-center items-center">
-                    <Socials links={{ github: "https://github.com/Addy897", linkedin:null,instagram:null}} />
-                    {/* About Section */}
+                        {/* Tags Section */}
+                        <div className="w-full flex justify-center items-center mt-4">
+                            <Socials links={{ github: "https://github.com/Addy897", linkedin: null, instagram: null }} />
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <div className="col-span-2 flex justify-center items-center w-full mt-8">
+
+            <div className="col-span-2 flex justify-center items-center w-full">
                 <div className="w-full sm:w-1/2">
                     <SuggestionBox />
                 </div>
             </div>
-    </div>
-}
+        </div>
+    );
+};
+
 export default About;

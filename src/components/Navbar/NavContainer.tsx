@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { User } from 'lucide-react';
 import NavLink from './Navlink';
 import Link from 'next/link';
@@ -12,16 +12,15 @@ type NavigationProps = {
 
 const Navbar: React.FC<NavigationProps> = ({ name, children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  
 
   return (
     <div className="relative">
       <nav className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white p-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between pb-2">
-          {/* Animated Logo */}
+          {/* Logo */}
           <Link className="hidden md:flex items-center group cursor-pointer" href='/'>
             <span className="text-2xl font-extrabold tracking-tight transition-all duration-300 group-hover:scale-105">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-purple-400 group-hover:from-purple-300 group-hover:to-purple-500">
@@ -33,12 +32,23 @@ const Navbar: React.FC<NavigationProps> = ({ name, children }) => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="flex items-center space-x-8">
+          {/* Hamburger Menu for Mobile */}
+          <button 
+            className="md:hidden p-2 text-white" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About me</NavLink>
             <NavLink href="/">Features</NavLink>
-            
+
             {/* Account Dropdown */}
             <div className="relative items-center">
               <button
@@ -58,7 +68,43 @@ const Navbar: React.FC<NavigationProps> = ({ name, children }) => {
             </div>
           </div>
         </div>
-        
+
+        {/* Mobile Sidebar Menu */}
+        <div className={`fixed top-0 left-0 w-64 h-full bg-gradient-to-r from-indigo-900 to-purple-900 transform z-50 ${isMenuOpen ? 'translate-x-0 ' : '-translate-x-full'} md:hidden transition-transform duration-300`}>
+          <div className="flex flex-col p-4 space-y-4">
+            {/* Close Button for Mobile Menu */}
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="text-white text-2xl absolute top-4 right-4"
+              aria-label="Close menu"
+            >
+              &times;
+            </button>
+
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/about">About me</NavLink>
+            <NavLink href="/">Features</NavLink>
+
+            {/* Account Dropdown */}
+            <div className="relative items-center">
+              <button
+                ref={buttonRef}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="p-2 hover:bg-purple-800/50 flex flex-row justify-center items-start rounded-full transition-all duration-300 focus:outline-none hover:scale-110 active:scale-95"
+                aria-label="Account menu"
+              >
+                <User className="w-5 h-5 items-center text-purple-100 hover:text-pink-200 transition-colors duration-300" />
+                {name}
+              </button>
+              {isDropdownOpen && (
+                <div ref={dropdownRef}>
+                  {children}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* Small Waves Pattern */}
         <div className="absolute bottom-0 left-0 w-full h-2 overflow-hidden">
           <div className="relative w-full h-full">
