@@ -5,10 +5,12 @@ import { StudentInfo } from '@/components/StudentCard/StudentInfo';
 import { Badge } from '@/components/StudentCard/Badge';
 import { ActionButtons } from '@/components/StudentCard/ActionButtons';
 import { Avatar } from '@/components/StudentCard/Avatar';
+import { redirect, RedirectType } from 'next/navigation';
 
 export type StudentCardProps = {
+  email: string;
   name: string;
-  photoURL: string|null;
+  photoURL: string | null;
   usn: string;
   branch: string;
   year: number;
@@ -17,6 +19,7 @@ export type StudentCardProps = {
 
 export const StudentCard: React.FC<StudentCardProps> = ({
   name,
+  email,
   photoURL,
   usn,
   branch,
@@ -26,14 +29,16 @@ export const StudentCard: React.FC<StudentCardProps> = ({
   const [isLiked, setIsLiked] = useState(false);
 
   const handleTalkClick = () => {
-    console.log('Initiating chat with', name);
+    redirect(`/student?email=${email}`, RedirectType.replace);
   };
 
   return (
-    <div className="w-md bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 transform hover:-translate-y-1">
+    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 transform hover:-translate-y-1">
       <div className="p-6 space-y-4">
-        <div className="flex items-start gap-4">
-          <Avatar img={photoURL??name}/>
+        {/* Flex layout for avatar, student info, and actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <Avatar img={photoURL ?? name} />
+
           <div className="flex-1">
             <div className="border-l-4 border-indigo-500 pl-4">
               <h2 className="text-2xl font-bold text-gray-800 hover:text-indigo-600 transition-colors duration-300">
@@ -43,14 +48,17 @@ export const StudentCard: React.FC<StudentCardProps> = ({
             </div>
           </div>
         </div>
-        
+
+        {/* Year Badge */}
         <Badge year={year} />
-        
+
+        {/* Tags Section */}
         <div className="pt-4 border-t-2 border-gray-200">
           <TagList tags={tags} />
         </div>
 
-        <ActionButtons 
+        {/* Action Buttons (Like/Message) */}
+        <ActionButtons
           isLiked={isLiked}
           onLikeToggle={() => setIsLiked(!isLiked)}
           onTalkClick={handleTalkClick}

@@ -1,6 +1,8 @@
-'use client'; 
+'use client';
 import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import { Search, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { branches, years } from '@/data/branches';
 
 type FilterType = 'usn' | 'name' | 'branch' | 'year' | 'tags';
 
@@ -29,24 +31,9 @@ const StudentFilter: React.FC = () => {
     tags: ''
   });
   const filterRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter(); // Next.js router to handle navigation
 
-  const branches = [
-    "Computer Science",
-    "CSE (Data Science)",
-    "CSE (IOT)",
-    "Information Science",
-    "AIMLE",
-    "ECE",
-    "ETE",
-    "EEE",
-    "VLSI",
-    "Mechanical Engineering",
-    "Robotics",
-    "Chemical Engineering",
-    "Civil Engineering"
-  ];
-
-  const years = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
+ 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -105,6 +92,7 @@ const StudentFilter: React.FC = () => {
       [filter]: ''
     }));
     setActiveFilter(null);
+    router.push("/")
   };
 
   const renderFilterInput = () => {
@@ -161,6 +149,24 @@ const StudentFilter: React.FC = () => {
     }
   };
 
+  // Handle the filter button click to update the URL with query parameters
+  const handleFilterApply = () => {
+    let queryParams="";
+
+    // Add each selected filter to the queryParams object
+    Object.entries(selectedValues).forEach(([key, value]) => {
+      
+      if (value) {
+        if(queryParams!==""){
+          queryParams+="&";
+        }
+        queryParams+= `${key}=${value}`;
+      }
+    });
+
+    router.push(`?${queryParams}`);
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
       <div className="bg-white rounded-lg shadow-md p-6">
@@ -211,6 +217,16 @@ const StudentFilter: React.FC = () => {
               </div>
             ) : null
           )}
+        </div>
+
+        {/* Button to apply filters and update URL */}
+        <div className="mt-4">
+          <button
+            onClick={handleFilterApply}
+            className="px-4 py-2 bg-violet-600 text-white rounded-lg shadow-md hover:bg-violet-700 focus:outline-none"
+          >
+            Apply Filters
+          </button>
         </div>
       </div>
     </div>

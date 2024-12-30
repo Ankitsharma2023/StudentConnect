@@ -9,7 +9,7 @@ export const StepTwo: React.FC = () => {
   const addTag = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && tagInput.trim()) {
       e.preventDefault();
-      const newTag = tagInput.trim().toLowerCase();
+      const newTag = tagInput.trim().toLowerCase().replaceAll("#","");
       if (!data.tags.includes(newTag)) {
         setData(prev => ({
           ...prev,

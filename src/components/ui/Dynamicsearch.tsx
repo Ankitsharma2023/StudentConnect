@@ -73,16 +73,20 @@ const DynamicSearchField: React.FC<DynamicSearchFieldProps> = ({
   };
 
   const handleSubmit = (event: React.FormEvent): void => {
+    
     event.preventDefault();
     if (onSearch) {
+      
       onSearch(inputValue);
+    }else{
+      location.href=`?name=${inputValue}`
     }
+    
   };
 
   return (
-    <div className={`flex items-center justify-center w-full max-w-xl p-8 ${className}`}>
+    <div className={`flex items-center justify-start w-full max-w-xl ${className}`}>
       <div className="relative">
-        {/* Background pulse animation */}
         <div
           className={`
             absolute inset-0 rounded-full
@@ -106,7 +110,7 @@ const DynamicSearchField: React.FC<DynamicSearchFieldProps> = ({
           className={`
             relative flex items-center
             transition-all duration-500 ease-out
-            ${isExpanded ? 'w-96' : 'w-14'}
+            ${isExpanded ? 'w-full sm:w-96' : 'w-14'}
             ${isHovered ? 'scale-105' : 'scale-100'}
           `}
           onMouseEnter={() => setIsHovered(true)}

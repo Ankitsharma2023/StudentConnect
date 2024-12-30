@@ -1,6 +1,6 @@
 import React from 'react';
 import { LikeButton } from './LikeButton';
-import { TalkButton } from './TalkButton';
+import { MoreButton } from './MoreButton';
 
 type ActionButtonsProps = {
   isLiked: boolean;
@@ -16,7 +16,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   return (
     <div className="flex gap-3">
       <LikeButton isLiked={isLiked} onToggle={onLikeToggle} />
-      <TalkButton onClick={onTalkClick} />
+      <MoreButton onClick={onTalkClick} />
     </div>
   );
 };

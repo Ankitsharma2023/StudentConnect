@@ -38,11 +38,11 @@ model Account {
 }
 model Profile {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String?   @unique
-  name          String?
+  email         String   @unique
+  name          String
   photoURL      String?
-  about         String?
-  branch        String?
+  about         String
+  branch        String
   github        String?
   instagram     String?
   linkedin      String?
