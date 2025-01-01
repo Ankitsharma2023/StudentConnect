@@ -21,7 +21,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode,email:string,pho
     photoURL:photo,
     usn: '',
     branch: '',
-    year: 0,
+    year: 1,
     tags: [],
     about: '',
     linkedin: '',

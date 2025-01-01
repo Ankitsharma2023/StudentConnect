@@ -7,7 +7,6 @@ import { StepThree } from './StepThree';
 import { Confirmation } from './Confirmation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ProgressBar } from '../ui/ProgressBar';
-import { val } from '../validate';
 import { ToastContainer, toast } from 'react-toastify';
 
 export const FormSteps: React.FC = () => {
@@ -19,16 +18,11 @@ export const FormSteps: React.FC = () => {
       case 1:
         if (data.name && data.usn && data.branch && data.year) {
             const usnPattern = /^\d[a-zA-Z]{2}\d{2}[a-zA-Z]{2}\d{3}$/;
-            if (!usnPattern.test(data.usn)) {
+            if (!usnPattern.test(data.usn) && data.year!==1) {
                 toast.error('Invalid USN format. Correct format: 1BIYYBB00N');
                 return false;
             }
-            
-            const usnValid = await val(data.email, data.usn);
-            if (!usnValid) {
-              toast.error('Account for this USN is already used!');
-            }
-            return usnValid;
+            return true;
         } else {
           toast.error('Please fill in all fields: Name, USN, Branch, and Year.');
           return false;

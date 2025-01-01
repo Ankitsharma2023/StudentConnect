@@ -14,7 +14,7 @@ export const TagList: React.FC<TagListProps> = ({ tags }) => {
             hover:bg-indigo-100 hover:text-indigo-700 cursor-pointer
             transition-all duration-300 ease-in-out transform hover:scale-105"
         >
-          #{tag}
+          #{tag.replaceAll("#","")}
         </span>
       ))}
     </div>

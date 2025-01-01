@@ -20,7 +20,7 @@ export async function create(data:StudentData){
             tags:data.tags,
             about:data.about,
             linkedin:data.linkedin,
-            github:data.instagram,
+            github:data.github,
             instagram:data.instagram,
 
         },

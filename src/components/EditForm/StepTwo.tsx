@@ -29,7 +29,7 @@ export const StepTwo: React.FC = () => {
 
   const handleAddClick = () => {
     if (tagInput.trim()) {
-      const newTag = tagInput.trim().toLowerCase();
+      const newTag = tagInput.trim().toLowerCase().replaceAll("#","");
       if (!data.tags.includes(newTag)) {
         setData(prev => ({
           ...prev,
