@@ -29,13 +29,12 @@ export const StudentCard: React.FC<StudentCardProps> = ({
   const [isLiked, setIsLiked] = useState(false);
 
   const handleTalkClick = () => {
-    redirect(`/student?email=${email}`, RedirectType.replace);
+    redirect(`/student?email=${encodeURI(email)}`, RedirectType.replace);
   };
 
   return (
     <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 transform hover:-translate-y-1">
       <div className="p-6 space-y-4">
-        {/* Flex layout for avatar, student info, and actions */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           <Avatar img={photoURL ?? name} />
 
@@ -49,15 +48,12 @@ export const StudentCard: React.FC<StudentCardProps> = ({
           </div>
         </div>
 
-        {/* Year Badge */}
         <Badge year={year} />
 
-        {/* Tags Section */}
         <div className="pt-4 border-t-2 border-gray-200">
           <TagList tags={tags} />
         </div>
 
-        {/* Action Buttons (Like/Message) */}
         <ActionButtons
           isLiked={isLiked}
           onLikeToggle={() => setIsLiked(!isLiked)}

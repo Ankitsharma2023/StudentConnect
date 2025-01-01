@@ -8,6 +8,7 @@ import { Confirmation } from './Confirmation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { ProgressBar } from '../ui/ProgressBar';
 import { ToastContainer, toast } from 'react-toastify';
+import { val } from '../validate';
 export const FormSteps: React.FC = () => {
   const { step, setStep, isLastStep, data } = useFormContext();
   const [isValid, setIsValid] = useState<boolean | null>(null); 
@@ -32,7 +33,12 @@ export const FormSteps: React.FC = () => {
                  toast.error('Invalid USN format. Correct format: 1BIYYBB00N');
                  return false;
              }
-             return true;
+              const usnValid = await val(data.email, data.usn);
+              if (!usnValid) {
+                toast.error('Account for this USN is already used!');
+              }
+              return usnValid;
+
              
          } else {
            toast.error('Please fill in all fields: Name, USN, Branch, and Year.');
