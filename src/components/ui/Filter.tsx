@@ -31,7 +31,7 @@ const StudentFilter: React.FC = () => {
     tags: ''
   });
   const filterRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter(); // Next.js router to handle navigation
+  const router = useRouter(); 
 
  
 
@@ -52,7 +52,7 @@ const StudentFilter: React.FC = () => {
     setActiveFilter(activeFilter === filter ? null : filter);
   };
 
-  // Update to use 'keyof FilterValues' to ensure we're working with valid keys
+  
   const handleInputChange = (filter: keyof FilterValues, value: string) => {
     setInputValues(prev => ({
       ...prev,
@@ -149,18 +149,18 @@ const StudentFilter: React.FC = () => {
     }
   };
 
-  // Handle the filter button click to update the URL with query parameters
+  
   const handleFilterApply = () => {
     let queryParams="";
 
-    // Add each selected filter to the queryParams object
+    
     Object.entries(selectedValues).forEach(([key, value]) => {
       
       if (value) {
         if(queryParams!==""){
           queryParams+="&";
         }
-        queryParams+= `${key}=${value}`;
+        queryParams+= `${key}=${encodeURIComponent(value)}`;
       }
     });
 

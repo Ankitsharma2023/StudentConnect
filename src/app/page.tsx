@@ -10,10 +10,9 @@ import NotFound from "@/components/NotFound/NotFound";
 const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
   const session = await auth();
   if (!session) return notFound();
-
   
   const { name, usn, branch, year, tags } = await searchParams;
-
+  const filter = name||usn||branch||year||tags;
   
   const filterConditions:any = {}; 
 
@@ -26,7 +25,8 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
   }
 
   if (branch) {
-    filterConditions.branch = { contains: branch, mode: "insensitive" };
+    const cleanedBranch = branch.trim();
+    filterConditions.branch = { equals: cleanedBranch};
   }
 
   if (year) {
@@ -60,10 +60,25 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
         <DynamicSearchField />
         <StudentFilter />
       </div>
-      <div className="min-h-screen w-full grid grid-col-1 sm:grid-col-2 md:grid-cols-3 items-center justify-center p-2 md:p-4 gap-5">
-        {students.map((studentData, index) => (
-          <StudentCard
-            key={index}
+      
+      <div className="w-full justify-center grid grid-col-1 sm:grid-col-2 md:grid-cols-3 p-2 md:p-4 gap-5">
+        {filter?null:
+      <StudentCard
+            key={0}
+            photoURL={currentProfile.photoURL}
+            name={currentProfile.name!}
+            usn={currentProfile.usn}
+            branch={currentProfile.branch!}
+            year={currentProfile.year}
+            tags={currentProfile.tags}
+            email={currentProfile.email}
+          />}
+        {students.map((studentData, index) => {
+          if(studentData.email===session.user?.email && !filter){
+            return null;
+          }
+          return <StudentCard
+            key={index+1}
             photoURL={studentData.photoURL}
             name={studentData.name!}
             usn={studentData.usn}
@@ -72,7 +87,7 @@ const HomePage = async ({ searchParams }: { searchParams: Promise<{ [key: string
             tags={studentData.tags}
             email={studentData.email}
           />
-        ))}
+        })}
       </div>
     </main>
   );

@@ -29,7 +29,7 @@ export const StudentCard: React.FC<StudentCardProps> = ({
   const [isLiked, setIsLiked] = useState(false);
 
   const handleTalkClick = () => {
-    redirect(`/student?email=${encodeURI(email)}`, RedirectType.replace);
+    redirect(`/student?email=${encodeURIComponent(email)}`, RedirectType.push);
   };
 
   return (
@@ -50,7 +50,7 @@ export const StudentCard: React.FC<StudentCardProps> = ({
 
         <Badge year={year} />
 
-        <div className="pt-4 border-t-2 border-gray-200">
+        <div className="pt-4 border-t-2 border-gray-200 overflow-hidden">
           <TagList tags={tags} />
         </div>
 

@@ -122,3 +122,13 @@ body {
   background-color: #303030;
   opacity: 8%;
 }
+
+.scrolling-container {
+  @apply overflow-x-scroll overflow-y-hidden;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+.scrolling-container::-webkit-scrollbar {
+  display: none;
+}
