@@ -9,10 +9,10 @@ interface ChatContainerProps {
    unreadCount:number, 
    msgs:{senderEmail:string, text: string; isRead: boolean }[]
    sendMessage: (newMessage: string)=>Promise<Message|null>
-   markMessagesAsRead: ()=>Promise<void>
+
   }  
 
-const ChatContianer: React.FC<ChatContainerProps> = ({currentEmail,recieverEmail,unreadCount,msgs,sendMessage,markMessagesAsRead}) => {
+const ChatContianer: React.FC<ChatContainerProps> = ({currentEmail,recieverEmail,unreadCount,msgs,sendMessage}) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState<{senderEmail:string, text: string; isRead: boolean }[]>(msgs);
   const [unreadMessageCount, setUnreadCount] = useState<number>(unreadCount);

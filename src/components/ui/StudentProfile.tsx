@@ -3,7 +3,7 @@ import { years } from "@/data/branches";
 import Socials from "../Socials/SocialLinks";
 import ChatContainer from "../ChatPopup/ChatContainer";
 import { auth } from "@/auth";
-import { getMessages, getUnreadMessageCount, markMessagesAsRead, sendMessage } from "../messages";
+import { getMessages, getUnreadMessageCount, sendMessage } from "../messages";
 interface StudentProfileProps {
   student: {
     name: string;
@@ -33,10 +33,7 @@ const StudentProfile: React.FC<StudentProfileProps> = async ({ student }) => {
     const message=await sendMessage(senderEmail,receiverEmail,newMessage);
     return message;
   } 
-  const markRead =async () =>{
-    'use server'
-    markMessagesAsRead(senderEmail,receiverEmail);
-  }
+  
   const msg = await getMessages(senderEmail,receiverEmail);
   const unreadCount=await getUnreadMessageCount(senderEmail,receiverEmail);
   return (
@@ -92,7 +89,7 @@ const StudentProfile: React.FC<StudentProfileProps> = async ({ student }) => {
         </div>
       </div>
       {senderEmail!==receiverEmail?
-      <ChatContainer unreadCount={unreadCount} recieverEmail={student.email} currentEmail={session?.user?.email??""} msgs={msg} sendMessage={sendM} markMessagesAsRead={markRead}/>:null}
+      <ChatContainer unreadCount={unreadCount} recieverEmail={student.email} currentEmail={session?.user?.email??""} msgs={msg} sendMessage={sendM} />:null}
     </div>
   );
 };
