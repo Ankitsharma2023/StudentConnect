@@ -9,7 +9,10 @@ export const StepThree: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-gray-900">Optional</h2>
+
       <div className="space-y-4">
+
         <div className="relative">
           <Input
             label="LinkedIn Profile"

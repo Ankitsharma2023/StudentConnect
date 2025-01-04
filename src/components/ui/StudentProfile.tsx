@@ -3,7 +3,6 @@ import { years } from "@/data/branches";
 import Socials from "../Socials/SocialLinks";
 import ChatContainer from "../ChatPopup/ChatContainer";
 import { auth } from "@/auth";
-import { Message } from "@prisma/client";
 import { getMessages, getUnreadMessageCount, markMessagesAsRead, sendMessage } from "../messages";
 interface StudentProfileProps {
   student: {
@@ -28,6 +27,9 @@ const StudentProfile: React.FC<StudentProfileProps> = async ({ student }) => {
   const receiverEmail=student.email;
   const sendM=async (newMessage: string)=>{
     'use server'
+    if(senderEmail===receiverEmail){
+      return null;
+    }
     const message=await sendMessage(senderEmail,receiverEmail,newMessage);
     return message;
   } 
@@ -89,7 +91,8 @@ const StudentProfile: React.FC<StudentProfileProps> = async ({ student }) => {
           </div>
         </div>
       </div>
-      <ChatContainer unreadCount={unreadCount} currentEmail={session?.user?.email??""} msgs={msg} sendMessage={sendM} markMessagesAsRead={markRead}/>
+      {senderEmail!==receiverEmail?
+      <ChatContainer unreadCount={unreadCount} recieverEmail={student.email} currentEmail={session?.user?.email??""} msgs={msg} sendMessage={sendM} markMessagesAsRead={markRead}/>:null}
     </div>
   );
 };

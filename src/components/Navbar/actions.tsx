@@ -9,6 +9,21 @@ const Actions = async () => {
             <DropdownItem href="editProfile" icon={<Settings />}>
                 Edit Profile
             </DropdownItem>
+            {/* <form
+        action={async () => {
+            "use server";
+            await signOut();
+            
+        }}
+        >
+            
+                
+                
+            <DeleteButton/>
+       
+                
+            
+            </form> */}
             <form
         action={async () => {
             "use server";

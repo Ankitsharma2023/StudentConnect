@@ -1,9 +1,9 @@
 'use server'
 import db from "@/lib/db"
-import { Profile, Suggestions, User } from "@prisma/client";
+import {  Message, Profile, Suggestions, User } from "@prisma/client";
 
 export default async function Fetch(model:string){
-    let response:User[]|Profile[]|Suggestions[]|null=null;
+    let response:User[]|Profile[]|Suggestions[]|Message[]|null=null;
     switch (model) {
         case 'users':
           response = await db.user.findMany();
@@ -14,6 +14,7 @@ export default async function Fetch(model:string){
         case 'suggestions':
           response = await db.suggestions.findMany();
           break
+        
         default:
           return
       }

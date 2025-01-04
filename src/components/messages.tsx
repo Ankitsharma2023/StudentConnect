@@ -100,8 +100,8 @@ export async function markMessagesAsRead(userEmail: string,receiverEmail:string)
   const conversationId=conversation.id;
   await db.message.updateMany({
     where: {
-      conversationId,
-      senderEmail: userEmail,  
+      senderEmail: receiverEmail,
+      receiverEmail: userEmail,  
       isRead: false,  
     },
     data: {

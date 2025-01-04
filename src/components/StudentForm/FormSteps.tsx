@@ -42,10 +42,10 @@ export const FormSteps: React.FC = () => {
       case 3:
        
 
-        if (!data.linkedin && !data.github && !data.instagram) {
-          toast.error('Please provide at least one social link (LinkedIn, GitHub, Instagram).');
-          return false;
-        }
+        // if (!data.linkedin && !data.github && !data.instagram) {
+        //   toast.error('Please provide at least one social link (LinkedIn, GitHub, Instagram).');
+        //   return false;
+        // }
 
        
         const isLinkedInValid = (url: string | undefined): boolean => {

@@ -1,5 +1,5 @@
 import { CheckCheck } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface Message {
   senderEmail: string;
@@ -18,15 +18,28 @@ interface ChatPopupProps {
 
 const ChatPopup: React.FC<ChatPopupProps> = ({ currentEmail,isOpen, onClose, messages, addMessage, markAllMessagesAsRead }) => {
   const [message, setMessage] = useState<string>("");
+  const containerRef = useRef<HTMLDivElement>(null); 
 
-
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [messages.length, containerRef]);
+   useEffect(() => {
+        const interval = setInterval(() => {
+          if(isOpen){
+            markAllMessagesAsRead();
+            }        
+          }, 5000);
+        return () => clearInterval(interval);
+      }, [isOpen]);
   const handleSendMessage = () => {
     if (message.trim()) {
       addMessage(message);
       setMessage("");
     }
   };
-
+  
   return (
     <>
       {isOpen && (
@@ -45,8 +58,7 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ currentEmail,isOpen, onClose, mes
             </button>
           </div>
 
-          {/* Messages Area */}
-          <div className="mt-4 h-60 overflow-y-auto">
+          <div className="mt-4 h-60 overflow-y-auto scrolling-y-container" id="container" ref={containerRef}>
             {messages.length > 0 ? (
               messages.map((msg, index) => {
                 const isUser = currentEmail===msg.senderEmail;
@@ -68,9 +80,9 @@ const ChatPopup: React.FC<ChatPopupProps> = ({ currentEmail,isOpen, onClose, mes
             ) : (
               <p className="text-gray-500">.</p>
             )}
+            
           </div>
 
-          {/* Input Area */}
           <div className="flex mt-4">
             <input
               type="text"

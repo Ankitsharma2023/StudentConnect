@@ -128,7 +128,14 @@ body {
   scrollbar-width: none; 
   -ms-overflow-style: none;
 }
-
+.scrolling-y-container {
+  @apply overflow-y-scroll overflow-x-hidden;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
 .scrolling-container::-webkit-scrollbar {
+  display: none;
+}
+.scrolling-y-container::-webkit-scrollbar {
   display: none;
 }
