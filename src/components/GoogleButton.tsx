@@ -1,6 +1,6 @@
 const GoogleButton = () => {
   return (
-    <button className="max-w-[320px] flex px-6 py-2 text-sm font-bold text-center uppercase align-middle items-center rounded-lg border border-[rgba(50,50,80,0.25)] gap-3 text-white bg-[rgb(50,50,80)] cursor-pointer transition-all duration-600 hover:scale-102 hover:bg-[rgb(90,90,120)] hover:shadow-[0_2px_4px_rgba(90,90,120,0.1)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(0,0,40,0.3)] active:scale-98 active:opacity-80 sm:max-w-full">
+    <button className = "max-w-[320px] flex px-6 py-2 text-sm font-bold text-center uppercase align-middle items-center rounded-lg border border-[rgba(50,50,80,0.25)] gap-3 text-white bg-[rgb(50,50,80)] cursor-pointer transition-all duration-600 hover:scale-102 hover:bg-[rgb(90,90,120)] hover:shadow-[0_2px_4px_rgba(90,90,120,0.1)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(0,0,40,0.3)] active:scale-98 active:opacity-80 sm:max-w-full">
       <svg
         className="h-6 w-6 fill-white mr-2"
         viewBox="0 0 256 262"
