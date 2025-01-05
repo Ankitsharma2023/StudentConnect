@@ -1,11 +1,10 @@
-
 import { auth } from "@/auth";
-import { FormProvider} from "@/components/EditForm/FormContext";
-import { FormSteps } from "@/components/EditForm/FormSteps";
+import { FormProvider } from "@/components/EditForm/FormContext";
+
+import { MultiStepForm } from "@/components/registration/multi-step-form";
 import { EditFormLayout } from "@/components/ui/EditFormLayout";
 import db from "@/lib/db";
 import { notFound, redirect, RedirectType } from "next/navigation";
-
 
 const Test = async () => {
   const session = await auth();
@@ -18,12 +17,14 @@ const Test = async () => {
     redirect("/profile", RedirectType.replace);
   }
   return (
-    <FormProvider Sdata={existingUser} >
+    <FormProvider Sdata={existingUser}>
       <EditFormLayout>
-        <FormSteps />
+        {/* <FormSteps /> */}
+
+        <MultiStepForm></MultiStepForm>
       </EditFormLayout>
     </FormProvider>
-  )
+  );
 };
 
 export default Test;

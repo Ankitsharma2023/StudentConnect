@@ -27,11 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased w-full h-full bg-gradient-to-b from-emerald-50 to-emerald-100 text-black `}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased w-full h-full  `}
       >
-        <Navbar/>
+        <Navbar />
         {children}
-        <ScrollToTopButton/>
+        <ScrollToTopButton />
       </body>
     </html>
   );

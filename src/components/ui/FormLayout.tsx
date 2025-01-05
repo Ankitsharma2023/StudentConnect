@@ -1,5 +1,6 @@
-import React from 'react';
-import { DollarSign, Leaf } from 'lucide-react';
+import React from "react";
+
+import { MarqueeBG } from "../common/MarqueeBG";
 
 interface FormLayoutProps {
   children: React.ReactNode;
@@ -7,46 +8,16 @@ interface FormLayoutProps {
 
 export const FormLayout: React.FC<FormLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-10 left-10 text-emerald-200 animate-float-slow">
-          <Leaf className="w-16 h-16 transform -rotate-45" />
+    <div className="relative min-h-screen">
+      <MarqueeBG />
+      <main className="relative z-10 flex min-h-screen flex-col items-center justify-center p-5">
+        <div className="mx-auto my-5 max-w-2xl text-center">
+          <h1 className="bg-gradient-to-r from-black to-black/70 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+            Join BS NOW
+          </h1>
         </div>
-        <div className="absolute top-20 right-20 text-emerald-200 animate-float">
-          <DollarSign className="w-12 h-12" />
-        </div>
-        <div className="absolute bottom-20 left-1/4 text-emerald-200 animate-float-delayed">
-          <Leaf className="w-10 h-10 transform rotate-45" />
-        </div>
-        <div className="absolute top-1/3 right-1/4 text-emerald-200 animate-float-slow">
-          <DollarSign className="w-8 h-8" />
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="w-24 h-24 bg-emerald-500 rounded-full flex items-center justify-center">
-                <DollarSign className="w-12 h-12 text-white" />
-              </div>
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-400 rounded-full flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" />
-              </div>
-            </div>
-          </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Student Profile</h2>
-          <p className="text-sm text-gray-600">
-            Please fill in your details to complete your profile
-          </p>
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden p-8 relative">
-          {children}
-        </div>
-      </div>
+        {children}
+      </main>
     </div>
   );
 };
